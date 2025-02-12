@@ -1,0 +1,73 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Feb 12, 2025, 4:07:00 PM
+    Author     : HOME PC
+*/
+#header-container{
+    background-color: black;
+    color:white;
+}
+
+#sub-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+    margin:0 !important;
+}
+
+p{
+    margin-bottom: 0 !important;
+}
+
+a{
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.line{
+    width: 100%;
+    border-top: solid 1px white;
+}
+
+.a:hover{
+    cursor: pointer;
+    background-color: gray;
+}
+.a:hover a{
+    color:black !important;
+}
+
+.a{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em 2em;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+#shopping-icon{
+    font-size:22px;
+    cursor: pointer;
+}
+
+#shopping-icon:hover{
+    color:gray;
+}
+
+.search{
+    max-width: 400px;
+}
+
