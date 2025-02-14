@@ -4,6 +4,7 @@
     Author     : HOME PC
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,11 +22,7 @@
                 </p>
             </div>
             <div class="row">
-                <%int[] a = new int[4];
-                  for(int i : a){
-                    
-                    
-                %>
+                <c:forEach var="item" items="${[0,0,0,0]}">
                 <div class="card col-4">
                     <a href="shop-single.html">
                         <img src="<%= request.getContextPath() %>/assets/item.jpg" height="100%" width="100%" class="card-img-top" alt="...">
@@ -48,7 +45,7 @@
                         <p class="text-muted">Reviews (24)</p>
                     </div>
                 </div>
-                <%}%>
+                </c:forEach>
             </div>
         </div>
     </body>

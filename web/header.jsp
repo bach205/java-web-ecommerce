@@ -23,10 +23,10 @@
         <div id ="header-container" class = "container-fluid">
             <div class ="row main-header">
                 <div class="col-3">
-                    <h1>PRJ</h1>
+                    <h1><a href="home.jsp">PRJ</a></h1>
                 </div>
                 <div class="col-6 flex-row">
-                    <p class="a text-center"><a href="#">topList</a></p>
+                    <p class="a text-center"><a href="topList.jsp">topList</a></p>
                     <input class="form-control form-control-sm search" type="text" placeholder="tim kiem" name="finding"/>
                 </div>
                 <div class ="col-3 flex-row">
