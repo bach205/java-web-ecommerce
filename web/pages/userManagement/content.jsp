@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="<c:out value ="${pageContext.request.contextPath}"/>/CSS/userManagement/content.css"/>
-        <c:set var="listUser" value="${requestScope.data}"></c:set>
+        <c:set var="list" value="${requestScope.data}"></c:set>
         </head>
         <body>
             <h1>List user</h1>
@@ -28,8 +28,9 @@
                     <th style="width:10em">Action</th>
                 </tr>
 
-            <c:if test="${userList.size()!=0}">
-                    <c:forEach var="item" items="${listUser}">
+            <c:if test="${list.size()!=0}">
+                    <c:forEach var="item" items="${list}">
+                        
                     <tr>
                         <td>${item.getFirstName()}</td>
                         <td>${item.getLastName()}</td>
@@ -44,7 +45,7 @@
                     </tr>
                 </c:forEach>
             </c:if>
-            <c:if test="${userList.size()==0}">
+            <c:if test="${list.size()==0}">
                 <p>No user yet</p>
             </c:if>
         </table>

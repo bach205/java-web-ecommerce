@@ -8,4 +8,7 @@
         <servlet-name>getAllUser</servlet-name>
         <url-pattern>/getAllUser</url-pattern>
     </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

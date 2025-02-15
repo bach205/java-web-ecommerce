@@ -1,0 +1,83 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Feb 16, 2025, 1:59:01 AM
+    Author     : HOME PC
+*/
+
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Feb 16, 2025, 1:33:13 AM
+    Author     : HOME PC
+*/
+
+.login-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-wrapper {
+    padding: 2em;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input,select {
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+button[type="submit"] {
+    background: #4CAF50;
+    color: white;
+}
+
+button[type="button"] {
+    background: gray;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}

@@ -63,6 +63,7 @@ public class getAllUser extends HttpServlet {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+        System.out.println(listUser);
         request.setAttribute("data", listUser);
         request.getRequestDispatcher("userManagement.jsp").forward(request, response);
     } 

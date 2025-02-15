@@ -30,8 +30,8 @@
                     <input class="form-control form-control-sm search" type="text" placeholder="tim kiem" name="finding"/>
                 </div>
                 <div class ="col-3 flex-row">
-                    <div class="btn btn-primary">Login</div>
-                    <div class="btn btn-secondary">Register</div>
+                    <div class="btn btn-primary"><a href="login.jsp">Login</a></div>
+                    <div class="btn btn-secondary"><a href="register.jsp">Register</a></div>
                     <div id="shopping-icon"><i class="fa-solid fa-cart-shopping"></i></div>
                 </div>
             </div>
