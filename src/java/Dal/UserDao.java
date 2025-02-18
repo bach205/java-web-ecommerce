@@ -39,4 +39,23 @@ public class UserDao extends DBContext{
         }
         return list;
     } 
+    
+    public int createUser(User user){
+        String email = user.getEmail();
+        String password = user.getPassword();
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        int gender = user.getGender();
+        String address = user.getAddress();
+        int role = 0;
+        String query = "insert into users values (N'"+email+"',N'"+password+"',N'"+firstName+"',N'"+lastName+"',"+gender+",N'"+address+"',"+role+")";
+        try{
+            PreparedStatement ps = connection.prepareStatement(query);
+            int affected = ps.executeUpdate();
+            return affected;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
 }

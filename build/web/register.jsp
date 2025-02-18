@@ -13,17 +13,12 @@
     </head>
     <body>
         <header><%@include file="header.jsp" %></header>
+        <c:set var="res" value = "${requestScope.response}"/>
         <main>
-            <!--            private String email;
-                private String password;
-                private String firstName;
-                private String lastName;
-                private int gender;
-                private String address;-->
             <section>
                 <div class="login-container">
                     <h2>Đăng Kí</h2>
-                    <form class="login-wrapper" action="LoginServlet" method="post">
+                    <form class="login-wrapper" action="RegisterUser" method="post">
                         <div style="display: flex;flex-direction: row;gap:10px">
                             <label>
                                 First name
@@ -49,12 +44,14 @@
                         </label>
                         <label>
                             Gender
-                            <select>
+                            <select name="gender">
                                 <option value=0>Male</option>
                                 <option value=1>Female</option>
                                 <option value=2>Unknow</option>
                             </select>
                         </label>
+                        
+                        <p><c:out value="${res}"/></p>
 
                         <button type="submit">Đăng kí</button>
                         <button type="button" onclick="window.location.href='login.jsp'">Đăng nhập</button>  

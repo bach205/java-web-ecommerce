@@ -4,9 +4,17 @@
         <servlet-name>getAllUser</servlet-name>
         <servlet-class>Controller.getAllUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterUser</servlet-name>
+        <servlet-class>Controller.RegisterUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>getAllUser</servlet-name>
         <url-pattern>/getAllUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterUser</servlet-name>
+        <url-pattern>/RegisterUser</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home.jsp</welcome-file>
