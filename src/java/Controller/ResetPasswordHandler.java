@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author HOME PC
  */
-public class RegisterUser extends HttpServlet {
+public class ResetPasswordHandler extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +35,10 @@ public class RegisterUser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterUser</title>");  
+            out.println("<title>Servlet ResetPasswordHandler</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterUser at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ResetPasswordHandler at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,26 +71,41 @@ public class RegisterUser extends HttpServlet {
         UserDao db = new UserDao();
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        int gender;
-        try{
-           gender = Integer.parseInt(request.getParameter("gender"));
-        }catch(Exception e){
-            request.setAttribute("response", "gender phải là male,female hoặc unknow");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+        String confirmPassword = request.getParameter("confirmPassword");
+        if(email.isBlank()){
+            request.setAttribute("response", "email khong duoc rong");
+            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+            return;
+        }else if(password.isBlank()){
+            request.setAttribute("response", "password khong duoc rong");
+            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+            return;
+        } else if(confirmPassword.isBlank()){
+            request.setAttribute("response", "confirm password khong duoc rong");
+            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
             return;
         }
-        String address = request.getParameter("address");
-        User user = new User(email,password,firstName,lastName,gender,address);
-        int rowAffected = db.createUser(user);
-        if( rowAffected > 0){
-            request.setAttribute("userData", user);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        }else{
-            request.setAttribute("response", "Email đã tồn tại");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+        User user = db.getUserByEmail(email);
+        if(user == null){
+            request.setAttribute("response", "user khong ton tai");
+            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+            return;
         }
+        if(!password.equals(confirmPassword)){
+            request.setAttribute("response", "password khong giong nhau");
+            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+            return;
+        }
+        
+        int rowAffected = db.updatePassword(email, password);
+        if(rowAffected > 0){
+            request.setAttribute("isSuccess", true);
+            request.setAttribute("response", "reset successfully");           
+        }else{
+            request.setAttribute("response", "reset failed");
+        }
+        
+        request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
     }
 
     /** 

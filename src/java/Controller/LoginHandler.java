@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author HOME PC
  */
-public class RegisterUser extends HttpServlet {
+public class LoginHandler extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +35,10 @@ public class RegisterUser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterUser</title>");  
+            out.println("<title>Servlet LoginHandler</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterUser at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet LoginHandler at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,26 +71,23 @@ public class RegisterUser extends HttpServlet {
         UserDao db = new UserDao();
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        int gender;
-        try{
-           gender = Integer.parseInt(request.getParameter("gender"));
-        }catch(Exception e){
-            request.setAttribute("response", "gender phải là male,female hoặc unknow");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+        if(email.isBlank()){
+            request.setAttribute("response", "email không được để trống");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }else if(password.isBlank()){
+            request.setAttribute("response", "password không được để trống");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-        String address = request.getParameter("address");
-        User user = new User(email,password,firstName,lastName,gender,address);
-        int rowAffected = db.createUser(user);
-        if( rowAffected > 0){
+        User user = db.LoginValidate(password, email);
+        if(user!=null){
             request.setAttribute("userData", user);
             request.getRequestDispatcher("home.jsp").forward(request, response);
         }else{
-            request.setAttribute("response", "Email đã tồn tại");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }
+            request.setAttribute("response", "email or password is not valid");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }       
     }
 
     /** 

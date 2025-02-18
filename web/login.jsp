@@ -14,10 +14,11 @@
     <body>
         <header><%@include file="header.jsp" %></header>
         <main>
+            <c:set var="res" value="${response}"/>
             <section>
                 <div class="login-container">
                     <h2>Đăng nhập</h2>
-                    <form class="login-wrapper" action="LoginServlet" method="post">
+                    <form class="login-wrapper" action="LoginHandler" method="post">
                         <label>
                             Email
                             <input type="text" name="email" placeholder="abc@examle.com" required>
@@ -29,6 +30,7 @@
                         <div style="display: flex; flex-direction: row; justify-content: flex-end">
                             <a style = "color: black !important;cursor:pointer" href="resetPassword.jsp">Quên mật khẩu?</a>
                         </div>
+                        <p style = "color: red">${res}</p>
                         <button type="submit">Đăng nhập</button>
                         <button type="button" onclick="window.location.href='register.jsp'">Đăng kí</button>  
                     </form>

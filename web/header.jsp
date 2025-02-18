@@ -20,6 +20,7 @@
 
     </head>
     <body>
+        <c:set var="userData" value="${userData}"/>
         <div id ="header-container" class = "container-fluid">
             <div class ="row main-header">
                 <div class="col-3">
@@ -30,9 +31,32 @@
                     <input class="form-control form-control-sm search" type="text" placeholder="tim kiem" name="finding"/>
                 </div>
                 <div class ="col-3 flex-row">
-                    <div class="btn btn-primary"><a href="login.jsp">Login</a></div>
-                    <div class="btn btn-secondary"><a href="register.jsp">Register</a></div>
+                    <c:if test="${userData == null}">
+                        <div class="btn btn-primary"><a href="login.jsp">Login</a></div>
+                        <div class="btn btn-secondary"><a href="register.jsp">Register</a></div>
+                    </c:if>
+
                     <div id="shopping-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                        <c:if test="${userData != null}">
+                        <div>hi ${userData.getFirstName()}</div>
+                        <div onclick="avatarOnClick()" id="avatar"></div>
+                        <!--                        <ul id="menu">
+                                                    <li>item</li>
+                                                    <li>item</li>
+                                                    <li>item</li>
+                                                    <li><a href="getAllUser">User management</a></li>
+                                                    <li><a href="">Create product</a></li>
+                                                    <li><a href="home.jsp">log out</a></li>
+                                                </ul>-->
+                    </c:if>
+                    <ul id="menu" style="display: block">
+                        <li>item</li>
+                        <li>item</li>
+                        <li>item</li>
+                        <li><a href="getAllUser">User management</a></li>
+                        <li><a href="">Create product</a></li>
+                        <li><a href="home.jsp">log out</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="line"></div>
@@ -44,5 +68,6 @@
                 <li class="text-center col-2 a"><a href="#">type</a></li>
             </ul>
         </div>
+        <script src="<%= request.getContextPath()%>/JS/header.js" ></script>
     </body>
 </html>

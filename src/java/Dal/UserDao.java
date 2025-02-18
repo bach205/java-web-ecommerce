@@ -58,4 +58,64 @@ public class UserDao extends DBContext{
         }
         return 0;
     }
+    
+    public User getUserByEmail(String email){
+        User user = null;
+        String query = "Select * from users where email = N'"+email+"'";
+        try{
+            
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword("password");
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setGender(rs.getInt("gender"));
+                user.setAddress(rs.getString("address"));
+                user.setRole(rs.getInt("role"));
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return user;
+    }
+    public User LoginValidate (String password,String email){
+        User user = null;
+        String query = "Select * from users where email = N'"+email+"' and password = N'"+password+"'";
+        try{
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword("password");
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setGender(rs.getInt("gender"));
+                user.setAddress(rs.getString("address"));
+                user.setRole(rs.getInt("role"));
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return user;
+    }
+    
+    public int updatePassword(String email,String password){
+        String query = "update users set password =N'"+password+"' where email = N'"+email+"'";
+        try{
+            PreparedStatement ps = connection.prepareStatement(query);
+            return ps.executeUpdate();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            
+        }
+        return 0;
+    }
 }

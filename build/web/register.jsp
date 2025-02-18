@@ -51,7 +51,7 @@
                             </select>
                         </label>
                         
-                        <p><c:out value="${res}"/></p>
+                        <p style = "color: red">${res}</p>
 
                         <button type="submit">Đăng kí</button>
                         <button type="button" onclick="window.location.href='login.jsp'">Đăng nhập</button>  

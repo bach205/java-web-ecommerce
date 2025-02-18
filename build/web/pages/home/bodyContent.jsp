@@ -5,7 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,10 +22,10 @@
                 </p>
             </div>
             <div class="row">
-                <c:forEach var="item" items="${[0,0,0,0]}">
-                <div class="card col-4">
+                <c:forEach var="item" items="${productList}">
+                <div class="card col-3">
                     <a href="shop-single.html">
-                        <img src="<%= request.getContextPath() %>/assets/item.jpg" height="100%" width="100%" class="card-img-top" alt="...">
+                        <img src="<%= request.getContextPath() %>/assets/products/${item.getImageURL()}" height="100%" width="100%" class="card-img-top" alt="...">
                     </a>
                     <div class="card-body">
                         <ul class="list-unstyled d-flex justify-content-between">
@@ -36,13 +36,12 @@
                                 <i class="text-muted fa fa-star"></i>
                                 <i class="text-muted fa fa-star"></i>
                             </li>
-                            <li class="text-muted text-right">$240.00</li>
+                            <li class="text-muted text-right">${item.getPrice()}</li>
                         </ul>
-                        <a href="shop-single.html" class="h2 text-decoration-none text-dark">Gym Weight</a>
+                        <a href="shop-single.html" class="h2 text-decoration-none text-dark">${item.getTitle()}</a>
                         <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
+                            ${item.getDescription()}
                         </p>
-                        <p class="text-muted">Reviews (24)</p>
                     </div>
                 </div>
                 </c:forEach>

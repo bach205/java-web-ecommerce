@@ -14,10 +14,11 @@
     <body>
         <header><%@include file="header.jsp" %></header>
         <main>
+            <c:set var="res" value = "${response}"/>
             <section>
                 <div class="login-container">
                     <h2>Reset Password</h2>
-                    <form class="login-wrapper" action="LoginServlet" method="post">
+                    <form class="login-wrapper" action="ResetPasswordHandler" method="post">
                         <label>
                             Email
                             <input type="text" name="email" placeholder="abc@examle.com" required>
@@ -30,9 +31,12 @@
                             Confirm password
                             <input type="password" name="confirmPassword" placeholder="Mật khẩu" required>
                         </label>
-                        <div style="display: flex; flex-direction: row; justify-content: flex-end">
-                            <a style = "color: black !important;cursor:pointer" href="resetPassword.jsp">Quên mật khẩu?</a>
-                        </div>
+                        <c:if test="${isSuccess == true}">
+                            <p style="color:green">${res}</p>
+                        </c:if>
+                        <c:if test="${isSuccess != true}">
+                            <p style="color:red">${res}</p>
+                        </c:if>
                         <button type="submit">Reset Password</button>
                         <button type="button" onclick="window.location.href='login.jsp'">Return</button>  
                     </form>

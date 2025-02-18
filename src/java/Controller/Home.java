@@ -5,20 +5,21 @@
 
 package Controller;
 
-import Dal.UserDao;
-import Model.User;
+import Dal.ProductDao;
+import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
  * @author HOME PC
  */
-public class RegisterUser extends HttpServlet {
+public class Home extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +36,10 @@ public class RegisterUser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterUser</title>");  
+            out.println("<title>Servlet Home</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterUser at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet Home at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +56,10 @@ public class RegisterUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        ProductDao productDb = new ProductDao();
+        List<Product> productList = productDb.getLatestProduct();
+        request.setAttribute("productList", productList);
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     } 
 
     /** 
@@ -68,29 +72,7 @@ public class RegisterUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        UserDao db = new UserDao();
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        int gender;
-        try{
-           gender = Integer.parseInt(request.getParameter("gender"));
-        }catch(Exception e){
-            request.setAttribute("response", "gender phải là male,female hoặc unknow");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-            return;
-        }
-        String address = request.getParameter("address");
-        User user = new User(email,password,firstName,lastName,gender,address);
-        int rowAffected = db.createUser(user);
-        if( rowAffected > 0){
-            request.setAttribute("userData", user);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        }else{
-            request.setAttribute("response", "Email đã tồn tại");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /** 
