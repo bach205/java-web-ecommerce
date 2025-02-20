@@ -42,7 +42,11 @@
                     <div class="detail" style="color:red">
                         <span><strong>Price: </strong></span><span>${product.getPrice()}</span>
                     </div>
-                    <button class="btn btn-primary" type="button">Thêm vào giỏ</button>
+                    <form action="ProductDetail?userId=${sessionScope.userData.getId()}&productId=${product.getId()}" method="post">
+                        <button class="btn btn-primary" type="submit">Thêm vào giỏ</button>
+                    </form>
+                    <c:if test="${param.response == true}"><p style="color:green">add to cart successfully</p></c:if>
+                    <c:if test="${param.response == false}"><p style="color:red">this product is already in your carts</p></c:if>
                 </div>
             </div>
         </section>

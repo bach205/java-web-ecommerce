@@ -31,8 +31,8 @@
                             <a style = "color: black !important;cursor:pointer" href="ResetPasswordHandler">Quên mật khẩu?</a>
                         </div>
                         <p style = "color: red">${res}</p>
-                        <button type="submit">Đăng nhập</button>
-                        <button type="button" onclick="window.location.href='RegisterHandler'">Đăng kí</button>  
+                        <button class="button" type="submit">Đăng nhập</button>
+                        <button class="button" type="button" onclick="window.location.href='RegisterHandler'">Đăng kí</button>  
                     </form>
                 </div>
             </section>

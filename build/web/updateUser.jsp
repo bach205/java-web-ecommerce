@@ -50,7 +50,7 @@
                         
                         <p style = "color: red">${res}</p>
 
-                        <button type="submit">Update</button> 
+                        <button class="button" type="submit">Update</button> 
                     </form>
                 </div>
             </section>

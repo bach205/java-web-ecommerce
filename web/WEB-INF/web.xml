@@ -40,6 +40,14 @@
         <servlet-name>ProductDetail</servlet-name>
         <servlet-class>Controller.ProductDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Cart</servlet-name>
+        <servlet-class>Controller.Cart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogOut</servlet-name>
+        <servlet-class>Controller.LogOut</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetAllUser</servlet-name>
         <url-pattern>/GetAllUser</url-pattern>
@@ -79,6 +87,14 @@
     <servlet-mapping>
         <servlet-name>ProductDetail</servlet-name>
         <url-pattern>/ProductDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cart</servlet-name>
+        <url-pattern>/Cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogOut</servlet-name>
+        <url-pattern>/LogOut</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>Home</welcome-file>

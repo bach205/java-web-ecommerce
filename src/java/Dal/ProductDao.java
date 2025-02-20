@@ -121,4 +121,42 @@ public class ProductDao extends DBContext {
             return null;
         }
     }
+    
+    public int addProductToCart(int productId, int userId){
+        String query = "insert into carts values ("+userId+","+productId+")";
+        try{
+            PreparedStatement ps = connection.prepareStatement(query);
+            return ps.executeUpdate();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    
+    public List<Product> getUserCart(int userId){
+        String query = "Select * from carts where userId = "+userId;
+        List<Product> result = new ArrayList<>();
+        try{
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int productId = rs.getInt("productId");
+                result.add(getProductById(productId));
+            }
+            return result;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return result;
+        }
+    }
+    public int deleteProductFromCart(int userId,int productId){
+        String query = "delete from carts where productId = "+productId+" and userId = "+userId;
+        try{
+            PreparedStatement ps = connection.prepareStatement(query);
+            return ps.executeUpdate();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
 }

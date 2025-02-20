@@ -21,14 +21,14 @@
 
     </head>
     <body>
-        <c:set var="userData" value="${userData}"/>
+        <c:set var="userData" value="${sessionScope.userData}"/>
         <div id ="header-container" class = "container-fluid">
             <div class ="row main-header">
                 <div class="col-3">
                     <h1><a href="Home">PRJ</a></h1>
                 </div>
                 <form action="Search" method="get" class="col-6 flex-row">
-                    <p class="a text-center"><a href="topList.jsp">topList</a></p>
+                    <p class="a text-center"><a href="Search">topList</a></p>
                     <input title="search" class="form-control form-control-sm search" type="text" placeholder="tim kiem" name="title"/>
                     <button id="search" title="search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
@@ -38,18 +38,20 @@
                         <div class="btn btn-secondary"><a href="RegisterHandler">Register</a></div>
                     </c:if>
 
-                    <div id="shopping-icon"><i class="fa-solid fa-cart-shopping"></i></div>
-                        <c:if test="${userData != null}">
+                    <div id="shopping-icon"><a href="Cart"><i class="fa-solid fa-cart-shopping"></i></a></div>
+                            <c:if test="${userData != null}">
                         <div>hi ${userData.getFirstName()}</div>
                         <div onclick="avatarOnClick()" id="avatar"></div>
                     </c:if>
-                    <ul id="menu" style="display: block">
+                    <ul id="menu" style="display: none">
                         <li>item</li>
                         <li>item</li>
                         <li>item</li>
-                        <li><a href="GetAllUser">User management</a></li>
-                        <li><a href="">Create product</a></li>
-                        <li><a href="home.jsp">log out</a></li>
+                            <c:if test="${sessionScope.userData.getRole()==1}">
+                            <li><a href="GetAllUser">User management</a></li>
+                            <li><a href="">Create product</a></li>
+                            </c:if>
+                        <li><a href="LogOut">log out</a></li>
                     </ul>
                 </div>
             </div>

@@ -82,8 +82,8 @@ public class LoginHandler extends HttpServlet {
         }
         User user = db.LoginValidate(password, email);
         if(user!=null){
-            request.setAttribute("userData", user);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.getSession().setAttribute("userData", user);
+            response.sendRedirect("Home");
         }else{
             request.setAttribute("response", "email or password is not valid");
             request.getRequestDispatcher("login.jsp").forward(request, response);

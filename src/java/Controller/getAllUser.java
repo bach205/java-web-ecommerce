@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controller;
 
 import Dal.UserDao;
@@ -20,34 +19,37 @@ import java.util.List;
  * @author HOME PC
  */
 public class GetAllUser extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GetAllUser</title>");  
+            out.println("<title>Servlet GetAllUser</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet GetAllUser at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet GetAllUser at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -55,20 +57,27 @@ public class GetAllUser extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        UserDao ud = new UserDao();
-        List<User> listUser = null;
-        try{
-            listUser = ud.getAllUser();
-        }catch(Exception e){
-            System.out.println(e.getMessage());
+            throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("userData");
+        if (user != null && user.getRole() == 1) {
+            UserDao ud = new UserDao();
+            List<User> listUser = null;
+            try {
+                listUser = ud.getAllUser();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            request.setAttribute("data", listUser);
+            request.getRequestDispatcher("userManagement.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("Home");
+            return;
         }
-        request.setAttribute("data", listUser);
-        request.getRequestDispatcher("userManagement.jsp").forward(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -76,12 +85,13 @@ public class GetAllUser extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

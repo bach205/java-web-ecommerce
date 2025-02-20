@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package Controller;
 
 import Dal.ProductDao;
-import Model.Product;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,38 +18,35 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author HOME PC
  */
-public class ProductDetail extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+public class Cart extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductDetail</title>");
+            out.println("<title>Servlet Cart</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductDetail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Cart at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -56,29 +54,21 @@ public class ProductDetail extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
+        
         ProductDao productDb = new ProductDao();
-        int id = 0;
-        try {
-            id = Integer.parseInt(request.getParameter("id"));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            response.sendRedirect("Home");
+        User user = (User) request.getSession().getAttribute("userData");
+        if(user == null){
+            response.sendRedirect("LoginHandle");
             return;
         }
-        Product product = productDb.getProductById(id);
-        if (product != null) {
-            request.setAttribute("product", product);
-            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("Home");
-            return;
-        }
-    }
+        int userId = user.getId();
+        request.setAttribute("productList", productDb.getUserCart(userId));
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -86,28 +76,31 @@ public class ProductDetail extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         ProductDao productDb = new ProductDao();
-        int userId = -1;
         int productId = -1;
-        try{
-            userId = Integer.parseInt(request.getParameter("userId"));
-            productId = Integer.parseInt(request.getParameter("productId"));
-        }catch(Exception e){
+        User user = (User) request.getSession().getAttribute("userData");
+        if(user == null){
             response.sendRedirect("LoginHandle");
             return;
         }
-        int result = productDb.addProductToCart(productId, userId);
-        if(result > 0){
-            response.sendRedirect("ProductDetail?id="+productId+"&response=true");
+        int userId = user.getId();
+        try{
+            productId = Integer.parseInt(request.getParameter("id"));
+        }catch(Exception e){
+            response.sendRedirect("Home");
+            return;
+        }
+        int result = productDb.deleteProductFromCart(userId,productId);
+        if(result > 0 ){
+            response.sendRedirect("Cart");
         }else{
-            response.sendRedirect("ProductDetail?id="+productId+"&response=false");
+            response.sendRedirect("Home");
         }
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

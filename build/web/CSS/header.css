@@ -63,8 +63,8 @@ a{
     cursor: pointer;
 }
 
-#shopping-icon:hover{
-    color:gray;
+#shopping-icon a:hover{
+    color:gray !important;
 }
 
 .search{

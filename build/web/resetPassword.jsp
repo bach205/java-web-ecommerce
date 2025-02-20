@@ -37,8 +37,8 @@
                         <c:if test="${isSuccess != true}">
                             <p style="color:red">${res}</p>
                         </c:if>
-                        <button type="submit">Reset Password</button>
-                        <button type="button" onclick="window.location.href='LoginHandler'">Return</button>  
+                        <button class="button" type="submit">Reset Password</button>
+                        <button class="button" type="button" onclick="window.location.href='LoginHandler'">Return</button>  
                     </form>
                 </div>
             </section>

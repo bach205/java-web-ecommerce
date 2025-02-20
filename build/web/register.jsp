@@ -53,8 +53,8 @@
                         
                         <p style = "color: red">${res}</p>
 
-                        <button type="submit">Đăng kí</button>
-                        <button type="button" onclick="window.location.href='LoginHandler'">Đăng nhập</button>  
+                        <button class="button" type="submit">Đăng kí</button>
+                        <button  class="button" type="button" onclick="window.location.href='LoginHandler'">Đăng nhập</button>  
                     </form>
                 </div>
             </section>
