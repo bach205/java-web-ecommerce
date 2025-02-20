@@ -83,6 +83,30 @@ public class UserDao extends DBContext{
         }
         return user;
     }
+    public User getUserById(int id){
+        User user = null;
+        String query = "Select * from users where id = N'"+id+"'";
+        try{
+            
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword("password");
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setGender(rs.getInt("gender"));
+                user.setAddress(rs.getString("address"));
+                user.setRole(rs.getInt("role"));
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return user;
+    }
     public User LoginValidate (String password,String email){
         User user = null;
         String query = "Select * from users where email = N'"+email+"' and password = N'"+password+"'";
@@ -117,5 +141,25 @@ public class UserDao extends DBContext{
             
         }
         return 0;
+    }
+    public int updateUser(User user){
+        String query = "update users set firstName =N'"+ user.getFirstName()+"', lastName =N'"+ user.getLastName()+"', email =N'"+ user.getEmail()+"', address =N'"+ user.getAddress()+"', gender ="+ user.getGender()+" where id = " + user.getId();
+        try{
+            PreparedStatement ps = connection.prepareStatement(query);
+            return ps.executeUpdate();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
+    public int deleteUserById(int id){
+        String query = "delete from users where id = " +id;
+        try{
+            PreparedStatement ps = connection.prepareStatement(query);
+            return ps.executeUpdate();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return 0;
+        }
     }
 }

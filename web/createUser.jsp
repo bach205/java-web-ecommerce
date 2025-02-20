@@ -1,6 +1,6 @@
 <%-- 
-    Document   : register
-    Created on : Feb 16, 2025, 1:23:03 AM
+    Document   : createUser
+    Created on : Feb 19, 2025, 9:46:49 PM
     Author     : HOME PC
 --%>
 
@@ -17,8 +17,8 @@
         <main>
             <section>
                 <div class="login-container">
-                    <h2>Đăng Kí</h2>
-                    <form class="login-wrapper" action="RegisterHandler" method="post">
+                    <h2>Create User</h2>
+                    <form class="login-wrapper" action="CreateUser" method="post">
                         <div style="display: flex;flex-direction: row;gap:10px">
                             <label>
                                 First name

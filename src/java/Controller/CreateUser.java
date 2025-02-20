@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author HOME PC
  */
-public class ResetPasswordHandler extends HttpServlet {
+public class CreateUser extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +35,10 @@ public class ResetPasswordHandler extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ResetPasswordHandler</title>");  
+            out.println("<title>Servlet CreateUser</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ResetPasswordHandler at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet CreateUser at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +55,7 @@ public class ResetPasswordHandler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        request.getRequestDispatcher("createUser.jsp").forward(request, response);
     } 
 
     /** 
@@ -66,46 +66,30 @@ public class ResetPasswordHandler extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         UserDao db = new UserDao();
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirmPassword");
-        if(email.isBlank()){
-            request.setAttribute("response", "email khong duoc rong");
-            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
-            return;
-        }else if(password.isBlank()){
-            request.setAttribute("response", "password khong duoc rong");
-            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
-            return;
-        } else if(confirmPassword.isBlank()){
-            request.setAttribute("response", "confirm password khong duoc rong");
-            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        int gender;
+        try{
+           gender = Integer.parseInt(request.getParameter("gender"));
+        }catch(Exception e){
+            request.setAttribute("response", "gender phải là male,female hoặc unknow");
+            request.getRequestDispatcher("createUser.jsp").forward(request, response);
             return;
         }
-        User user = db.getUserByEmail(email);
-        if(user == null){
-            request.setAttribute("response", "user khong ton tai");
-            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
-            return;
-        }
-        if(!password.equals(confirmPassword)){
-            request.setAttribute("response", "password khong giong nhau");
-            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
-            return;
-        }
-        
-        int rowAffected = db.updatePassword(email, password);
-        if(rowAffected > 0){
-            request.setAttribute("isSuccess", true);
-            request.setAttribute("response", "reset successfully");           
+        String address = request.getParameter("address");
+        User user = new User(email,password,firstName,lastName,gender,address);
+        int rowAffected = db.createUser(user);
+        if( rowAffected > 0){
+            response.sendRedirect("GetAllUser");
         }else{
-            request.setAttribute("response", "reset failed");
+            request.setAttribute("response", "Email đã tồn tại");
+            request.getRequestDispatcher("createUser.jsp").forward(request, response);
         }
-        
-        request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
     }
 
     /** 

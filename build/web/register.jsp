@@ -18,7 +18,7 @@
             <section>
                 <div class="login-container">
                     <h2>Đăng Kí</h2>
-                    <form class="login-wrapper" action="RegisterUser" method="post">
+                    <form class="login-wrapper" action="RegisterHandler" method="post">
                         <div style="display: flex;flex-direction: row;gap:10px">
                             <label>
                                 First name
@@ -54,7 +54,7 @@
                         <p style = "color: red">${res}</p>
 
                         <button type="submit">Đăng kí</button>
-                        <button type="button" onclick="window.location.href='login.jsp'">Đăng nhập</button>  
+                        <button type="button" onclick="window.location.href='LoginHandler'">Đăng nhập</button>  
                     </form>
                 </div>
             </section>

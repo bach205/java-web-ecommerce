@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
-        <servlet-name>getAllUser</servlet-name>
-        <servlet-class>Controller.getAllUser</servlet-class>
+        <servlet-name>GetAllUser</servlet-name>
+        <servlet-class>Controller.GetAllUser</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegisterUser</servlet-name>
-        <servlet-class>Controller.RegisterUser</servlet-class>
+        <servlet-name>RegisterHandler</servlet-name>
+        <servlet-class>Controller.RegisterHandler</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginHandler</servlet-name>
@@ -20,13 +20,29 @@
         <servlet-name>Home</servlet-name>
         <servlet-class>Controller.Home</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateUser</servlet-name>
+        <servlet-class>Controller.UpdateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>Controller.DeleteUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateUser</servlet-name>
+        <servlet-class>Controller.CreateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>Controller.Search</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>getAllUser</servlet-name>
-        <url-pattern>/getAllUser</url-pattern>
+        <servlet-name>GetAllUser</servlet-name>
+        <url-pattern>/GetAllUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegisterUser</servlet-name>
-        <url-pattern>/RegisterUser</url-pattern>
+        <servlet-name>RegisterHandler</servlet-name>
+        <url-pattern>/RegisterHandler</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginHandler</servlet-name>
@@ -39,6 +55,22 @@
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUser</servlet-name>
+        <url-pattern>/UpdateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/DeleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateUser</servlet-name>
+        <url-pattern>/CreateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/Search</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>Home</welcome-file>

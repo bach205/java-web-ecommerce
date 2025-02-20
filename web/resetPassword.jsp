@@ -38,7 +38,7 @@
                             <p style="color:red">${res}</p>
                         </c:if>
                         <button type="submit">Reset Password</button>
-                        <button type="button" onclick="window.location.href='login.jsp'">Return</button>  
+                        <button type="button" onclick="window.location.href='LoginHandler'">Return</button>  
                     </form>
                 </div>
             </section>

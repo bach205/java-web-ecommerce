@@ -15,7 +15,7 @@
         </head>
         <body>
             <h1>List user</h1>
-            <button type="button" class="btn btn-primary"style="margin-bottom: 10px">Create +</button>
+            <button type="button" class="btn btn-primary" style="margin-bottom: 10px" onclick = "window.location.href='CreateUser'">Create +</button>
 
             <table>
                 <tr>
@@ -29,18 +29,31 @@
                 </tr>
 
             <c:if test="${list.size()!=0}">
-                    <c:forEach var="item" items="${list}">
-                        
+                <c:forEach var="item" items="${list}">
                     <tr>
                         <td>${item.getFirstName()}</td>
                         <td>${item.getLastName()}</td>
                         <td>${item.getEmail()}</td>
-                        <td>${item.getGender()}</td>
+                        <td>
+                            <c:if test="${item.getGender() == 0}">Male</c:if>
+                            <c:if test="${item.getGender()==1}">Female</c:if>
+                            <c:if test="${item.getGender() == 2}">Unknown</c:if>
+                            
+                        </td>
                         <td>${item.getAddress()}</td>
-                        <td>${item.getRole()}</td>
+                        <td>
+                            <c:if test="${item.getRole() == 0}">Member</c:if>
+                            <c:if test="${item.getRole()==1}">Admin</c:if>
+                        </td>
                         <td style="display: flex; gap:5px">
-                            <span class="btn btn-primary">update</span>
-                            <span class="btn btn-danger">delete</span>
+                            <div class="btn btn-primary"><a href="UpdateUser?id=${item.getId()}">update</a></div>
+                            <div class="btn btn-danger">
+                                <form action="DeleteUser" method="post">
+                                    
+                                    <input type="text" style="display: none" name="id" value="${item.getId()}"/>
+                                    <button style="padding:0;margin: 0;background-color: inherit;color: white;border:0" type="submit">delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 </c:forEach>

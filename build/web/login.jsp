@@ -28,11 +28,11 @@
                             <input type="password" name="password" placeholder="Mật khẩu" required>
                         </label>
                         <div style="display: flex; flex-direction: row; justify-content: flex-end">
-                            <a style = "color: black !important;cursor:pointer" href="resetPassword.jsp">Quên mật khẩu?</a>
+                            <a style = "color: black !important;cursor:pointer" href="ResetPasswordHandler">Quên mật khẩu?</a>
                         </div>
                         <p style = "color: red">${res}</p>
                         <button type="submit">Đăng nhập</button>
-                        <button type="button" onclick="window.location.href='register.jsp'">Đăng kí</button>  
+                        <button type="button" onclick="window.location.href='RegisterHandler'">Đăng kí</button>  
                     </form>
                 </div>
             </section>

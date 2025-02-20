@@ -104,3 +104,10 @@ a{
 #menu li:hover{
     background-color: teal;
 }
+#search{
+    position: absolute;
+    right:30em;
+    background-color: inherit;
+    border:0;
+    
+}
