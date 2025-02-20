@@ -8,16 +8,6 @@ package Model;
  *
  * @author HOME PC
  */
-//id int identity(1,1) primary key,
-//	title nvarchar(100) unique not null,
-//	description nvarchar(max),
-//	brand nvarchar(30),
-//	color nvarchar(20),
-//	size nvarchar(15),
-//	type nvarchar(20),
-//	price float,
-//	releaseDate int,
-//	imageURL nvarchar(max)
 public class Product {
     private int id;
     private String title;
@@ -31,6 +21,14 @@ public class Product {
     private String imageURL;
 
     public Product() {
+    }
+
+    public Product(String title, String brand, String color, String size, String type) {
+        this.title = title;
+        this.brand = brand;
+        this.color = color;
+        this.size = size;
+        this.type = type;
     }
 
     

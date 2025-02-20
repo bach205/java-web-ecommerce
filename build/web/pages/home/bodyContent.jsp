@@ -21,31 +21,7 @@
                     Excepteur sint occaecat cupidatat non proident.
                 </p>
             </div>
-            <div class="row">
-                <c:forEach var="item" items="${productList}">
-                <div class="card col-3">
-                    <a href="shop-single.html">
-                        <img src="<%= request.getContextPath() %>/assets/products/${item.getImageURL()}" height="100%" width="100%" class="card-img-top" alt="...">
-                    </a>
-                    <div class="card-body">
-                        <ul class="list-unstyled d-flex justify-content-between">
-                            <li>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-muted fa fa-star"></i>
-                                <i class="text-muted fa fa-star"></i>
-                            </li>
-                            <li class="text-muted text-right">${item.getPrice()}</li>
-                        </ul>
-                        <a href="shop-single.html" class="h2 text-decoration-none text-dark">${item.getTitle()}</a>
-                        <p class="card-text">
-                            ${item.getDescription()}
-                        </p>
-                    </div>
-                </div>
-                </c:forEach>
-            </div>
+                <%@include file="../../displayList.jsp" %>
         </div>
     </body>
 </html>

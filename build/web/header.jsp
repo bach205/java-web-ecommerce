@@ -27,9 +27,9 @@
                 <div class="col-3">
                     <h1><a href="Home">PRJ</a></h1>
                 </div>
-                <form action="" method="get" class="col-6 flex-row">
+                <form action="Search" method="get" class="col-6 flex-row">
                     <p class="a text-center"><a href="topList.jsp">topList</a></p>
-                    <input title="search" class="form-control form-control-sm search" type="text" placeholder="tim kiem" name="finding"/>
+                    <input title="search" class="form-control form-control-sm search" type="text" placeholder="tim kiem" name="title"/>
                     <button id="search" title="search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <div class ="col-3 flex-row">

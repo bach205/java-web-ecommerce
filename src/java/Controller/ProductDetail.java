@@ -12,14 +12,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.Comparator;
-import java.util.List;
 
 /**
  *
  * @author HOME PC
  */
-public class Search extends HttpServlet {
+public class ProductDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +36,10 @@ public class Search extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Search</title>");
+            out.println("<title>Servlet ProductDetail</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Search at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ProductDetail at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,34 +58,22 @@ public class Search extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProductDao productDb = new ProductDao();
-        String title = request.getParameter("title");
-        String brand = request.getParameter("brand");
-        String color = request.getParameter("color");
-        String size = request.getParameter("size");
-        String type = request.getParameter("type");
-        String sort = request.getParameter("sort");
-        Product product = new Product(title, brand, color, size, type);
-        List<Product> data = productDb.search(product);
-
-        if (sort != null) {
-            if (sort.equals("releaseDate")) {
-                data.sort(new Comparator<Product>() {
-                    @Override
-                    public int compare(Product p1, Product p2) {
-                        return Integer.compare(p2.getReleaseDate(), p1.getReleaseDate());
-                    }
-                });
-            } else if (sort.equals("price")) {
-                data.sort(new Comparator<Product>() {
-                    @Override
-                    public int compare(Product p1, Product p2) {
-                        return Double.compare(p2.getPrice(), p1.getPrice());
-                    }
-                });
-            }
+        int id = 0;
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            response.sendRedirect("Home");
+            return;
         }
-        request.setAttribute("data", data);
-        request.getRequestDispatcher("search.jsp").forward(request, response);
+        Product product = productDb.getProductById(id);
+        if (product != null) {
+            request.setAttribute("product", product);
+            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("Home");
+            return;
+        }
     }
 
     /**
