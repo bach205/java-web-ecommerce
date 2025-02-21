@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,14 +60,31 @@ public class GetAllUser extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("userData");
+        int page = 1;
         if (user != null && user.getRole() == 1) {
             UserDao ud = new UserDao();
             List<User> listUser = null;
             try {
                 listUser = ud.getAllUser();
+                String s = request.getParameter("page");
+                if(s!= null){
+                    page = Integer.parseInt(s);
+                }else{
+                    page = 1;
+                }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+            
+            //phan trang
+            
+            int amountPerPage = 15;
+            int totalPage = (int)Math.ceil((float)listUser.size()/amountPerPage);
+            int start = (page-1)*amountPerPage > listUser.size() ? listUser.size() : (page-1)*amountPerPage;;
+            int end = (page-1)*amountPerPage+amountPerPage > listUser.size() ? listUser.size() : (page-1)*amountPerPage+amountPerPage;
+            listUser = listUser.subList(start, end);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("page", page);
             request.setAttribute("data", listUser);
             request.getRequestDispatcher("userManagement.jsp").forward(request, response);
         } else {

@@ -47,8 +47,13 @@
                     </form>
                     <c:if test="${param.response == true}"><p style="color:green">add to cart successfully</p></c:if>
                     <c:if test="${param.response == false}"><p style="color:red">this product is already in your carts</p></c:if>
+                    </div>
                 </div>
-            </div>
+            </section>
+        <section class="bg-secondary text-light py-5">
+            <c:set var="productList" value="${related}"/>
+            <h1 class="text-center">Related product</h1>
+            <%@include file="displayList.jsp" %>
         </section>
         <footer><%@include file="footer.jsp" %></footer>
     </body>

@@ -6,7 +6,7 @@
 package Controller;
 
 import Dal.ProductDao;
-import Model.User;
+import Dal.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author HOME PC
  */
-public class Cart extends HttpServlet {
+public class Statics extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +35,10 @@ public class Cart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Cart</title>");  
+            out.println("<title>Servlet Statics</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Cart at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet Statics at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,16 +55,15 @@ public class Cart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
-        ProductDao productDb = new ProductDao();
-        User user = (User) request.getSession().getAttribute("userData");
-        if(user == null){
-            response.sendRedirect("LoginHandle");
-            return;
-        }
-        int userId = user.getId();
-        request.setAttribute("productList", productDb.getUserCart(userId));
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
+        ProductDao pd = new ProductDao();
+        UserDao ud = new UserDao();
+        int p = pd.getAmountOfProduct();
+        int c = pd.getAmountOfCart();
+        int u = ud.getAmountOfUser();
+        request.setAttribute("numProducts", p);
+        request.setAttribute("numCarts", c);
+        request.setAttribute("numUsers", u);
+        request.getRequestDispatcher("statics.jsp").forward(request, response);
     } 
 
     /** 
@@ -77,26 +76,7 @@ public class Cart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ProductDao productDb = new ProductDao();
-        int productId = -1;
-        User user = (User) request.getSession().getAttribute("userData");
-        if(user == null){
-            response.sendRedirect("LoginHandler");
-            return;
-        }
-        int userId = user.getId();
-        try{
-            productId = Integer.parseInt(request.getParameter("id"));
-        }catch(Exception e){
-            response.sendRedirect("Home");
-            return;
-        }
-        int result = productDb.deleteProductFromCart(userId,productId);
-        if(result > 0 ){
-            response.sendRedirect("Cart");
-        }else{
-            response.sendRedirect("Home");
-        }
+        processRequest(request, response);
     }
 
     /** 

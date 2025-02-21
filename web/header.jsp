@@ -28,7 +28,7 @@
                     <h1><a href="Home">PRJ</a></h1>
                 </div>
                 <form action="Search" method="get" class="col-6 flex-row">
-                    <p class="a text-center"><a href="Search">topList</a></p>
+                    <p class="a text-center"><a href="Search">Top List</a></p>
                     <input title="search" class="form-control form-control-sm search" type="text" placeholder="tim kiem" name="title"/>
                     <button id="search" title="search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
@@ -37,32 +37,22 @@
                         <div class="btn btn-primary"><a href="LoginHandler">Login</a></div>
                         <div class="btn btn-secondary"><a href="RegisterHandler">Register</a></div>
                     </c:if>
-
-                    <div id="shopping-icon"><a href="Cart"><i class="fa-solid fa-cart-shopping"></i></a></div>
-                            <c:if test="${userData != null}">
+                    <c:if test="${userData != null}">
                         <div>hi ${userData.getFirstName()}</div>
                         <div onclick="avatarOnClick()" id="avatar"></div>
                     </c:if>
                     <ul id="menu" style="display: none">
-                        <li>item</li>
-                        <li>item</li>
-                        <li>item</li>
-                            <c:if test="${sessionScope.userData.getRole()==1}">
-                            <li><a href="GetAllUser">User management</a></li>
-                            <li><a href="">Create product</a></li>
+                        <li><a href="UpdateUser?id=${userData.getId()}"><i class="fa-solid fa-circle-info"></i> User information</a></li>
+                        <li><a href="Cart"><i class="fa-solid fa-cart-shopping"></i> Cart</a></li>
+                                <c:if test="${sessionScope.userData.getRole()==1}">
+                            <li><a href="GetAllUser"><i class="fa-solid fa-bars-progress"></i> User management</a></li>
+                            <li><a href="Statics"><i class="fa-solid fa-square-poll-vertical"></i> Statics</a></li>
                             </c:if>
-                        <li><a href="LogOut">log out</a></li>
+                        <li><a href="LogOut"><i class="fa-solid fa-right-from-bracket"></i> Log out</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="line"></div>
-            <ul class ="row flex-row" id="sub-header">
-                <li class="text-center col-2 a"><a href="#">type</a></li>
-                <li class="text-center col-2 a"><a href="#">type</a></li>
-                <li class="text-center col-2 a"><a href="#">type</a></li>
-                <li class="text-center col-2 a"><a href="#">type</a></li>
-                <li class="text-center col-2 a"><a href="#">type</a></li>
-            </ul>
+            
         </div>
         <script src="<%= request.getContextPath()%>/JS/header.js" ></script>
     </body>

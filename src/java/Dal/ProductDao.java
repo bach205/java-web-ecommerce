@@ -37,7 +37,46 @@ public class ProductDao extends DBContext {
 
     public List<Product> getLatestProduct() {
         List<Product> result = new ArrayList<>();
-        String query = "Select Top 8 * from Products";
+        String query = "Select Top 8 * from Products order by releaseDate";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            result = productMapper(rs, result);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public List<Product> getMostBoughtProduct() {
+        List<Product> result = new ArrayList<>();
+        String query = "select Top 8 a.* from products a join (select productId as id,count(userId) as amount from carts group by productId) as b on a.id = b.id order by b.amount desc";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            result = productMapper(rs, result);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public List<Product> getLuxuryProduct() {
+        List<Product> result = new ArrayList<>();
+        String query = "select top 8 * from products order by price desc";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            result = productMapper(rs, result);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public List<Product> getRelatedProduct(String type) {
+        List<Product> result = new ArrayList<>();
+        String query = "select top 8 * from products where type like N'%+" + type + "+%'";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -121,42 +160,77 @@ public class ProductDao extends DBContext {
             return null;
         }
     }
-    
-    public int addProductToCart(int productId, int userId){
-        String query = "insert into carts values ("+userId+","+productId+")";
-        try{
+
+    public int addProductToCart(int productId, int userId) {
+        String query = "insert into carts values (" + userId + "," + productId + ")";
+        try {
             PreparedStatement ps = connection.prepareStatement(query);
             return ps.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return 0;
         }
     }
-    
-    public List<Product> getUserCart(int userId){
-        String query = "Select * from carts where userId = "+userId;
+
+    public List<Product> getUserCart(int userId) {
+        String query = "Select * from carts where userId = " + userId;
         List<Product> result = new ArrayList<>();
-        try{
+        try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int productId = rs.getInt("productId");
                 result.add(getProductById(productId));
             }
             return result;
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return result;
         }
     }
-    public int deleteProductFromCart(int userId,int productId){
-        String query = "delete from carts where productId = "+productId+" and userId = "+userId;
-        try{
+
+    public int deleteProductFromCart(int userId, int productId) {
+        String query = "delete from carts where productId = " + productId + " and userId = " + userId;
+        try {
             PreparedStatement ps = connection.prepareStatement(query);
             return ps.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return 0;
         }
+    }
+
+    public int getAmountOfProduct() {
+        String query = "Select count(*) as sum from Products";
+        int result = 0;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                result = rs.getInt("sum");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public int getAmountOfCart() {
+        String query = "Select count(*) as sum from Carts";
+        int result = 0;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                result = rs.getInt("sum");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
     }
 }

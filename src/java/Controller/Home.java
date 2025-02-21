@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,8 +58,11 @@ public class Home extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         ProductDao productDb = new ProductDao();
-        List<Product> productList = productDb.getLatestProduct();
-        request.setAttribute("productList", productList);
+        List<List> data = new ArrayList<>();
+        data.add(productDb.getLatestProduct());
+        data.add(productDb.getLuxuryProduct());
+        data.add(productDb.getMostBoughtProduct());
+        request.setAttribute("data", data);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     } 
 

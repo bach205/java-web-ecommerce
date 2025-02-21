@@ -48,6 +48,10 @@
         <servlet-name>LogOut</servlet-name>
         <servlet-class>Controller.LogOut</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Statics</servlet-name>
+        <servlet-class>Controller.Statics</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetAllUser</servlet-name>
         <url-pattern>/GetAllUser</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>LogOut</servlet-name>
         <url-pattern>/LogOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Statics</servlet-name>
+        <url-pattern>/Statics</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>Home</welcome-file>

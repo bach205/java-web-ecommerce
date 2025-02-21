@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -67,7 +68,10 @@ public class ProductDetail extends HttpServlet {
             return;
         }
         Product product = productDb.getProductById(id);
+//        List<Product> related = productDb.getRelatedProduct(product.getType());
+        List<Product> related = productDb.getLatestProduct();
         if (product != null) {
+            request.setAttribute("related", related);
             request.setAttribute("product", product);
             request.getRequestDispatcher("productDetail.jsp").forward(request, response);
         } else {
@@ -90,18 +94,18 @@ public class ProductDetail extends HttpServlet {
         ProductDao productDb = new ProductDao();
         int userId = -1;
         int productId = -1;
-        try{
+        try {
             userId = Integer.parseInt(request.getParameter("userId"));
             productId = Integer.parseInt(request.getParameter("productId"));
-        }catch(Exception e){
-            response.sendRedirect("LoginHandle");
+        } catch (Exception e) {
+            response.sendRedirect("LoginHandler");
             return;
         }
         int result = productDb.addProductToCart(productId, userId);
-        if(result > 0){
-            response.sendRedirect("ProductDetail?id="+productId+"&response=true");
-        }else{
-            response.sendRedirect("ProductDetail?id="+productId+"&response=false");
+        if (result > 0) {
+            response.sendRedirect("ProductDetail?id=" + productId + "&response=true");
+        } else {
+            response.sendRedirect("ProductDetail?id=" + productId + "&response=false");
         }
     }
 

@@ -23,9 +23,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     right:2.5em;
     background-color: inherit;
     border:0;
-    
+
 }
 .display-product{
     min-height: 70vh;
+}
+.page{
+    text-align: center;
+    width: 2em;
+    height: 2em;
+    background-color: black;
+    margin: 0.5em;
+    color: white;
+    cursor: pointer;
+}
+
+.page:hover{
+    background-color: red;
 }
 

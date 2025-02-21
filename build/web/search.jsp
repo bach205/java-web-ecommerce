@@ -17,6 +17,28 @@
         </header>
         <main>
             <c:set var="productList" value="${data}"/>
+            <% 
+            int colorPage = 1;
+            int numPage =1;
+            int totalPage = 1;
+            try{
+                numPage = (Integer)request.getAttribute("page");
+                colorPage = (Integer)request.getAttribute("page");
+                totalPage = (Integer)request.getAttribute("totalPage");
+                if(totalPage<=2){
+                    numPage=3;
+                }
+                else if(numPage>totalPage -2){
+                    numPage = totalPage -2;
+                }else if(numPage<3){
+                    numPage = 3;
+                }
+            }catch(Exception e){
+            out.println(e.getMessage());
+                numPage =1;
+            }
+            
+            %>
             <section>
                 <form action="" method="get" class="search-option-container">
                     <button title="search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -62,6 +84,12 @@
                 </div>
 
             </section>
+            <div class = "d-flex flex-row gap-2">
+                <% for (int i = numPage-2;i<numPage+3;i++){
+            if(i>0 && i<=totalPage){%>
+                <a href="?page=<%=i%>" class="page" style ="<%= (colorPage == i) ? "background-color: red;" : "" %>"><%=i%></a>
+                <%}}%>
+            </div>
         </main>
         <footer>
             <%@include file="footer.jsp" %>

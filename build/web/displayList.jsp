@@ -12,26 +12,28 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/displayList.css" />
     </head>
     <body>
-        <div class="display-product-container">
+        <div class="display-product-container py-5">
+            
             <c:forEach var="item" items="${productList}">
+                
                 <a href="ProductDetail?id=${item.getId()}" style="cursor: pointer;display: block">
                     <div class="card">
                         <div class ="product-image">
                             <img src="<%= request.getContextPath() %>/assets/products/${item.getImageURL()}" alt="...">
                         </div>
                         <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>ReleaseDate ${item.getReleaseDate()}</li>
-                                <li class="text-muted text-right">${item.getPrice()}</li>
-                            </ul>
-                            <p class="h2 text-decoration-none text-dark">${item.getTitle()}</p>
-                            <p >
+                            
+                            <p  class="h2 text-decoration-none text-dark text-center">${item.getTitle()}</p>
+                            <p class="text-center">
                                 ${item.getDescription()}
                             </p>
+                            <ul class="list-unstyled d-flex justify-content-between ">
+                                <li>${item.getReleaseDate()}</li>
+                                <li class="text-right text-danger">${item.getPrice()} Đồng</li>
+                            </ul>
                         </div>
                     </div>
-                </a>
-                            
+                </a>   
             </c:forEach>
         </div>
     </body>

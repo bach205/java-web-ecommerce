@@ -68,6 +68,17 @@ public class Search extends HttpServlet {
         String sort = request.getParameter("sort");
         Product product = new Product(title, brand, color, size, type);
         List<Product> data = productDb.search(product);
+        int page = 1;
+        try {
+            String s = request.getParameter("page");
+            if (s != null) {
+                page = Integer.parseInt(s);
+            } else {
+                page = 1;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         if (sort != null) {
             if (sort.equals("releaseDate")) {
@@ -86,6 +97,13 @@ public class Search extends HttpServlet {
                 });
             }
         }
+        int amountPerPage = 16;
+        int totalPage = (int) Math.ceil((float) data.size() / amountPerPage);
+        int start = (page - 1) * amountPerPage > data.size() ? data.size() : (page - 1) * amountPerPage;;
+        int end = (page - 1) * amountPerPage + amountPerPage > data.size() ? data.size() : (page - 1) * amountPerPage + amountPerPage;
+        data = data.subList(start, end);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("page", page);
         request.setAttribute("data", data);
         request.getRequestDispatcher("search.jsp").forward(request, response);
     }
