@@ -8,6 +8,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 */
 
 .card{
+    max-height: 400px;
     padding: 5px;
     transition: all 1s ease;
     overflow: hidden;
