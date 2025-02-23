@@ -17,6 +17,7 @@
         <c:set var="user" value="${user}"/>
         <header><%@include file="header.jsp" %></header>
         <section>
+            
                 <div class="login-container">
                     <h2>Update</h2>
                     <form class="login-wrapper" action="UpdateUser?id=${user.getId()}" method="post">
@@ -54,6 +55,7 @@
                     </form>
                 </div>
             </section>
+        <img src="<%=request.getContextPath()%>/assets/banner.jpg" width="100%" height="auto" alt="alt"/>
         <footer><%@include file="footer.jsp"%></footer>
     </body>
 </html>

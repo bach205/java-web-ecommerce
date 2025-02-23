@@ -16,6 +16,7 @@
         <c:set var="res" value = "${requestScope.response}"/>
         <main>
             <section>
+                
                 <div class="login-container">
                     <h2>Đăng Kí</h2>
                     <form class="login-wrapper" action="RegisterHandler" method="post">
@@ -58,6 +59,7 @@
                     </form>
                 </div>
             </section>
+                        <img src="<%=request.getContextPath()%>/assets/banner.jpg" width="100%" height="auto" alt="alt"/>
         </main>
         <footer><%@include file="footer.jsp" %></footer>
     </body>

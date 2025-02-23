@@ -23,14 +23,15 @@
                         </div>
                         <div class="card-body">
                             
-                            <p  class="h2 text-decoration-none text-dark text-center">${item.getTitle()}</p>
+                            <p  class="h5 text-decoration-none text-dark text-center">${item.getTitle()}</p>
                             <p class="text-center">
                                 ${item.getDescription()}
                             </p>
                             <ul class="list-unstyled d-flex justify-content-between ">
-                                <li>${item.getReleaseDate()}</li>
+                                
                                 <li class="text-right text-danger">${item.getPrice()} Đồng</li>
                             </ul>
+                            <div class ="conner-icon">${item.getReleaseDate()}</div>
                         </div>
                     </div>
                 </a>   

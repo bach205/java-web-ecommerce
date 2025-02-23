@@ -90,6 +90,7 @@
                 <a href="?page=<%=i%>" class="page" style ="<%= (colorPage == i) ? "background-color: red;" : "" %>"><%=i%></a>
                 <%}}%>
             </div>
+            <img src="<%=request.getContextPath()%>/assets/banner.jpg" width="100%" height="auto" alt="alt"/>
         </main>
         <footer>
             <%@include file="footer.jsp" %>

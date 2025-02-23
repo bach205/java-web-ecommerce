@@ -16,6 +16,7 @@
         <main>
             <c:set var="res" value = "${response}"/>
             <section>
+                
                 <div class="login-container">
                     <h2>Reset Password</h2>
                     <form class="login-wrapper" action="ResetPasswordHandler" method="post">
@@ -42,6 +43,7 @@
                     </form>
                 </div>
             </section>
+            <img src="<%=request.getContextPath()%>/assets/banner.jpg" width="100%" height="auto" alt="alt"/>
         </main>
         <footer><%@include file="footer.jsp" %></footer>
     </body>

@@ -6,7 +6,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Created on : Feb 20, 2025, 8:55:52 AM
     Author     : HOME PC
 */
-
+body{
+    background-color: gray !important;
+}
 .search-option-container{
     justify-content: center;
     margin-top: 10px;

@@ -24,11 +24,10 @@
         <c:set var="userData" value="${sessionScope.userData}"/>
         <div id ="header-container" class = "container-fluid">
             <div class ="row main-header">
-                <div class="col-3">
-                    <h1><a href="Home">PRJ</a></h1>
+                <div class="col-3 text-dark">
+                    <a href="Home"><h1 style="color:White">Home</h1></a>
                 </div>
                 <form action="Search" method="get" class="col-6 flex-row">
-                    <p class="a text-center"><a href="Search">Top List</a></p>
                     <input title="search" class="form-control form-control-sm search" type="text" placeholder="tim kiem" name="title"/>
                     <button id="search" title="search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>

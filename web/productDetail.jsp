@@ -15,11 +15,11 @@
         <header><%@include file="header.jsp" %></header>
         <section class="container-fluid">
             <c:set var="product" value="${product}"/>
-            <div class="row d-flex justify-content-center flex-row my-4">
-                <div class="col-3">
+            <div class="row d-flex justify-content-center flex-row my-4 ">
+                <div class="col-3 border border-3 border-secondary">
                     <img class="product-image" src="<%=request.getContextPath()%>/assets/products/${product.getImageURL()}" alt="product image"/>
                 </div>
-                <div class="col-4 d-flex flex-column gap-3">
+                <div class="col-4 d-flex flex-column gap-3 border border-2">
                     <div class="detail">
                         <span><strong>Tên: </strong></span><span>${product.getTitle()}</span>
                     </div>
@@ -42,8 +42,8 @@
                     <div class="detail" style="color:red">
                         <span><strong>Price: </strong></span><span>${product.getPrice()}</span>
                     </div>
-                    <form action="ProductDetail?userId=${sessionScope.userData.getId()}&productId=${product.getId()}" method="post">
-                        <button class="btn btn-primary" type="submit">Thêm vào giỏ</button>
+                    <form class="d-flex flex-row justify-content-center" action="ProductDetail?userId=${sessionScope.userData.getId()}&productId=${product.getId()}" method="post">
+                        <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ</button>
                     </form>
                     <c:if test="${param.response == true}"><p style="color:green">add to cart successfully</p></c:if>
                     <c:if test="${param.response == false}"><p style="color:red">this product is already in your carts</p></c:if>

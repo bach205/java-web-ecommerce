@@ -13,6 +13,7 @@
     <body>
         <header><%@include file="header.jsp" %></header>
         <main>
+            <img src="<%=request.getContextPath()%>/assets/banner.jpg" width="100%" height="200px" alt="alt"/>
             <%@include file="/pages/userManagement/content.jsp" %>
         </main>
         <footer><%@include file="footer.jsp" %></footer>

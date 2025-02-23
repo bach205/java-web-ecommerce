@@ -14,15 +14,16 @@
     <body>
         <header><%@include file="header.jsp" %></header>
         <main>
+            <img src="<%=request.getContextPath()%>/assets/banner.jpg" width="100%" height="auto" alt="alt"/>
             <c:if test="${productList== null || productList.size() == 0}">
                 <div style="height: 70vh;">
                     <h1>chua co product nao het</h1>
                 </div>
             </c:if>
-            <div class="display-product-container">
+            <div class="display-product-container my-4">
 
                 <c:forEach var="item" items="${productList}">
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column" style="position: relative">
                         <a href="ProductDetail?id=${item.getId()}" style="cursor: pointer;display: block">
                             <div class="card">
                                 <div class ="product-image">
@@ -30,8 +31,8 @@
                                 </div>
                                 <div class="card-body">
                                     <ul class="list-unstyled d-flex justify-content-between">
-                                        <li>ReleaseDate ${item.getReleaseDate()}</li>
-                                        <li class="text-muted text-right">${item.getPrice()}</li>
+                                        <li>${item.getReleaseDate()}</li>
+                                        <li class="text-danger text-right">${item.getPrice()} Đồng</li>
                                     </ul>
                                     <p class="h2 text-decoration-none text-dark">${item.getTitle()}</p>
                                     <p >
@@ -40,12 +41,13 @@
                                 </div>
                             </div>
                         </a>
-                        <form action="Cart?id=${item.getId()}" method="post">
-                            <button class="btn btn-danger" type="submit" style="width: 100%">delete</button>
+                        <form action="Cart?id=${item.getId()}" method="post" style="position: absolute;right:0;top:0">
+                            <button class="btn btn-danger" type="submit" >X</button>
                         </form>
                     </div>
                 </c:forEach>
             </div>
+            <img src="<%=request.getContextPath()%>/assets/banner.jpg" width="100%" height="auto" alt="alt"/>
         </main>
         <footer>
             <%@include file="footer.jsp" %>
